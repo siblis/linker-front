@@ -1,8 +1,6 @@
 import './Home.scss';
 import Logo from '../../images/logo.png';
 import ArrowLeft from '../../images/arrow-left.png';
-import enLocale from '../../locale/en/home.json';
-import ruLocale from '../../locale/ru/home.json';
 
 import React, {PureComponent} from 'react';
 import classNames from 'classnames';
@@ -35,10 +33,9 @@ export default class Home extends PureComponent {
     
     componentDidMount() {
         const lang = (navigator.languages ? navigator.languages[0] : navigator.language) === 'ru' ? 'ru' : 'en';
-        switch (lang) {
-            case 'ru': this.setState(ruLocale); break;
-            default: this.setState(enLocale); break;
-        }
+        fetch(`/resources/locale/${lang}/home.json`)
+            .then(response => response.json())
+            .then(data => this.setState(data));
         canvasApp(this.refs.canvas);
     }
     
@@ -50,30 +47,37 @@ export default class Home extends PureComponent {
         return (
             <div className="home" onClick={this.resetPage}>
                 <div className="header">
-                    <div className="logo"><img src={Logo}/></div>
-                    <div className="log-in">{this.state.txtLogin}<div className="highlighting"/></div>
+                    <div className="logo"><a href="/"><img src={Logo}/></a></div>
+                    <div className="log-in">{this.state.txtLogin}
+                        <div className="highlighting"/>
+                    </div>
                 </div>
                 <div className="content">
                     <div className="sphere">
                         <canvas ref="canvas" width="368" height="368"/>
                     </div>
-                    <div className="about">{this.state.txtAbout}</div>
-                    <div className="title">{this.state.txtTitle}</div>
+                    <div className="text-block">
+                        <div className="about">{this.state.txtAbout}</div>
+                        <div className="title">{this.state.txtTitle}</div>
+                    </div>
                     <div className={infoModalClass}>
                         <div className="info-message-header">{this.state.txtInfoMessageHeader}</div>
-                        <div className="info-message"><p>{this.state.txtInfoMessage}</p></div>
+                        <div className="info-message">
+                            <div>{this.state.txtInfoMessage}</div>
+                        </div>
                     </div>
                 </div>
                 <div className="footer">
                     <div className="info" onClick={this.toggleInfoMessageModal}>
                         {
                             this.state.isClosed ?
-                                <span>{this.state.txtInfo}<div className="highlighting"/></span> :
+                                <span>{this.state.txtInfo}
+                                    <div className="highlighting"/></span> :
                                 <span><img src={ArrowLeft}/>{this.state.txtBack}</span>
                         }
                     </div>
                 </div>
-               
+            
             </div>
         );
     }

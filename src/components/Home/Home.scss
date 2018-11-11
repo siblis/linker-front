@@ -4,42 +4,40 @@
     top: 14px;
     left: 2px;
     height: 18px;
-    width: 2px;
+    width: 0;
     z-index: -1;
-    background-color: #001;
-    transition: background-color 2s ease-in, width 0.5s ease-in 0.3s;
+    transition: width 0.4s;
+    background-color: #e99191;
   }
 
   .header {
+    min-width: 300px;
     .logo {
       float: left;
-      margin: 42px 0 0 90px;
+      margin: 42px 0 0 10%;
+      display: inline-block;
       img {
         width: 115px;
         height: 42px;
-        object-fit: contain;
       }
       cursor: pointer;
     }
     .log-in {
       position: relative;
       float: right;
-      margin: 49px 107px 0 0;
+      margin: 51px 10% 0 0;
+      display: inline-block;
       width: 115px;
       height: 24px;
       font-size: 20px;
       font-weight: bold;
-      font-style: normal;
-      font-stretch: normal;
       line-height: 1.2;
-      letter-spacing: normal;
       text-align: right;
       color: #ffffff;
       cursor: pointer;
     }
     .log-in:hover .highlighting {
       width: 115px;
-      background-color: #e99191;
     }
   }
 
@@ -51,82 +49,106 @@
 
   .content {
     position: relative;
-    min-height: calc(100vh - 146px);
+    height: calc(100vh - 146px);
     .sphere {
       position: absolute;
       width: 368px;
       top: 15px;
-      left: 536px;
+      left: calc(50% - 184px);
       z-index: -1;
     }
-    .about {
-      padding: 250px 0 0 302px;
-      max-width: 588px;
-      height: 97px;
-      font-size: 20px;
-      font-weight: normal;
-      font-style: normal;
-      font-stretch: normal;
-      line-height: 1.4;
-      letter-spacing: normal;
-      text-align: left;
+    .text-block {
+      padding: calc(100vh - 420px) 0 0 calc(50% - 380px);
       color: #ffffff;
-    }
-    .title {
-      padding: 35px 0 0 302px;
-      max-width: 800px;
-      height: 43px;
-      font-size: 36px;
-      font-weight: bold;
-      font-style: normal;
-      font-stretch: normal;
-      line-height: 1.19;
-      letter-spacing: normal;
-      text-align: left;
-      color: #ffffff;
+      .about {
+        width: 588px;
+        font-size: 20px;
+        line-height: 1.4;
+      }
+      .title {
+        margin: 20px 0 0 0;
+        width: 800px;
+        font-size: 36px;
+        font-weight: bold;
+        line-height: 1.19;
+      }
     }
     .info-message-modal {
       position: absolute;
       z-index: 1;
-      top: -5px;
-      left: 205px;
-      width: 858px;
+      top: -3px;
+      left: calc(10% + 115px);
+      width: calc(80% - 228px);
       height: calc(100vh - 150px);
       text-align: left;
       background-color: #e99191;
       overflow: hidden;
       .info-message-header {
-        margin: 37px 0 0 98px;
-        height: 43px;
+        margin: 30px 0 0 98px;
         font-size: 36px;
         font-weight: bold;
-        font-style: normal;
-        font-stretch: normal;
         line-height: 1.19;
-        letter-spacing: normal;
-        text-align: left;
         color: #ffffff;
       }
       .info-message {
-        margin: 30px 0 29px 40px;
-        height: 367px;
+        margin: 15px 0 29px 40px;
         font-size: 20px;
-        font-weight: normal;
-        font-style: normal;
-        font-stretch: normal;
         line-height: 1.4;
-        letter-spacing: normal;
-        text-align: left;
         color: #ffffff;
         overflow-y: scroll;
         direction: rtl;
-        p {
+        div {
           padding: 0 39px;
+          height: calc(100vh - 300px);
         }
       }
     }
   }
 
+  @media all and (max-width: 900px) {
+    .content {
+      .text-block {
+        padding: calc(100vh - 440px) 10px 0 60px;
+        .about {
+          font-size: 14px;
+          width: 95%;
+        }
+        .title {
+          font-size: 24px;
+          width: 95%;
+        }
+      }
+    }
+  }
+
+  @media all and (max-width: 800px) {
+    .content {
+      .info-message-modal {
+        top: 3px;
+        left: 5%;
+        width: 90%;
+        .info-message-header {
+          margin: 15px 0 10px 30px;
+          font-size: 30px;
+          font-weight: bold;
+          line-height: 1.19;
+          color: #ffffff;
+        }
+        .info-message {
+          margin: 0 0 0 5px;
+          font-size: 20px;
+          line-height: 1.4;
+          color: #ffffff;
+          overflow-y: scroll;
+          direction: rtl;
+          div {
+            padding: 0 15px;
+            height: calc(100vh - 245px);
+          }
+        }
+      }
+    }
+  }
   .content:after {
     content: " ";
     display: block;
@@ -152,7 +174,6 @@
     }
     .info:hover .highlighting {
       width: 115px;
-      background-color: #e99191;
     }
     span > img {
       position: absolute;
