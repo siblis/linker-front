@@ -10,7 +10,7 @@ module.exports = {
     },
     output: {
         path: path.resolve(__dirname, 'dist'),
-        filename: 'resources/js/bundle.js'
+        filename: 'resources/js/bundle.js?[hash]'
     },
     resolve: {
         extensions: ['.js', '.jsx'],
@@ -68,6 +68,6 @@ module.exports = {
             template: path.resolve(__dirname, 'src', 'index.html'),
             filename: 'index.html'
         }),
-        new MiniCssExtractPlugin({filename: 'resources/css/style.css'})
+        new MiniCssExtractPlugin({filename: 'resources/css/style.css?[contenthash]'})
     ]
 };
