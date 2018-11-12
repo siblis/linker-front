@@ -105,38 +105,33 @@
     }
   }
 
-  @media all and (max-width: 900px) {
+  @media all and (max-width: 800px) {
     .content {
       .text-block {
         padding: calc(100vh - 440px) 10px 0 60px;
         .about {
           font-size: 14px;
-          width: 95%;
+          width: 80%;
         }
         .title {
           font-size: 24px;
-          width: 95%;
+          width: 80%;
         }
       }
-    }
-  }
-
-  @media all and (max-width: 800px) {
-    .content {
       .info-message-modal {
         top: 3px;
         left: 5%;
         width: 90%;
         .info-message-header {
           margin: 15px 0 10px 30px;
-          font-size: 30px;
+          font-size: 26px;
           font-weight: bold;
           line-height: 1.19;
           color: #ffffff;
         }
         .info-message {
           margin: 0 0 0 5px;
-          font-size: 20px;
+          font-size: 16px;
           line-height: 1.4;
           color: #ffffff;
           overflow-y: scroll;
@@ -149,6 +144,7 @@
       }
     }
   }
+
   .content:after {
     content: " ";
     display: block;
