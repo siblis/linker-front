@@ -1,4 +1,4 @@
-import './css/main.css';
+import './css/main.scss';
 
 import React, {PureComponent} from 'react';
 import ReactDom from 'react-dom';

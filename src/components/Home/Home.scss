@@ -1,27 +1,5 @@
 .home {
-  .highlighting {
-    position: absolute;
-    top: 14px;
-    left: 2px;
-    height: 18px;
-    width: 0;
-    z-index: -1;
-    transition: width 0.4s;
-    background-color: #e99191;
-  }
-
   .header {
-    min-width: 300px;
-    .logo {
-      float: left;
-      margin: 42px 0 0 10%;
-      display: inline-block;
-      img {
-        width: 115px;
-        height: 42px;
-      }
-      cursor: pointer;
-    }
     .log-in {
       position: relative;
       float: right;
@@ -41,12 +19,6 @@
     }
   }
 
-  .header:after {
-    content: " ";
-    display: block;
-    clear: both
-  }
-
   .content {
     position: relative;
     height: calc(100vh - 146px);
@@ -58,7 +30,7 @@
       z-index: -1;
     }
     .text-block {
-      padding: calc(100vh - 420px) 0 0 calc(50% - 380px);
+      padding: 260px 0 0 calc(50% - 380px);
       color: #ffffff;
       .about {
         width: 588px;
@@ -105,17 +77,23 @@
     }
   }
 
-  @media all and (max-width: 800px) {
+  @media all and (max-width: 900px) {
+    ::-webkit-scrollbar-button {
+      width: 10px;
+    }
+    ::-webkit-scrollbar {
+      width: 9px;
+    }
     .content {
       .text-block {
         padding: calc(100vh - 440px) 10px 0 60px;
         .about {
           font-size: 14px;
-          width: 80%;
+          width: 95%;
         }
         .title {
           font-size: 24px;
-          width: 80%;
+          width: 95%;
         }
       }
       .info-message-modal {
@@ -124,7 +102,54 @@
         width: 90%;
         .info-message-header {
           margin: 15px 0 10px 30px;
-          font-size: 26px;
+          font-size: 24px;
+          font-weight: bold;
+          line-height: 1.19;
+          color: #ffffff;
+        }
+        .info-message {
+          margin: 0 0 0 5px;
+          font-size: 16px;
+          line-height: 1.4;
+          color: #ffffff;
+          overflow-y: scroll;
+          direction: rtl;
+          div {
+            padding: 0 15px;
+            height: calc(100vh - 245px);
+          }
+        }
+      }
+    }
+  }
+
+  @media all and (max-width: 960px) and (orientation: landscape) {
+    ::-webkit-scrollbar-button {
+      width: 10px;
+    }
+    ::-webkit-scrollbar {
+      width: 9px;
+    }
+    .content {
+      .text-block {
+        padding: 5% 10px 0 60px;
+        .about {
+          font-size: 14px;
+          width: 95%;
+        }
+        .title {
+          margin: 10px 0 0 0;
+          font-size: 24px;
+          width: 95%;
+        }
+      }
+      .info-message-modal {
+        top: 3px;
+        left: 5%;
+        width: 90%;
+        .info-message-header {
+          margin: 15px 0 10px 30px;
+          font-size: 24px;
           font-weight: bold;
           line-height: 1.19;
           color: #ffffff;
