@@ -13,6 +13,11 @@
       text-align: right;
       color: #ffffff;
       cursor: pointer;
+      span > img {
+        position: absolute;
+        left: 9px;
+        top: 16px;
+      }
     }
     .log-in:hover .highlighting {
       width: 115px;

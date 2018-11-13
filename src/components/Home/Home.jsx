@@ -5,6 +5,7 @@ import ArrowLeft from '../../images/arrow-left.png';
 import React, {PureComponent} from 'react';
 import classNames from 'classnames';
 import canvasApp from './canvasApp';
+import Enter from '../Enter/Enter';
 
 export default class Home extends PureComponent {
     constructor(props) {
@@ -17,17 +18,27 @@ export default class Home extends PureComponent {
             txtBack: '',
             txtInfoMessageHeader: '',
             txtInfoMessage: '',
-            isClosed: true,
+            isInfoClosed: true,
+            isEnterClosed: true,
         };
     }
     
     toggleInfoMessageModal = () => {
-        this.setState({isClosed: !this.state.isClosed})
+        this.resetPage();
+        this.setState({isInfoClosed: !this.state.isInfoClosed})
+    };
+    
+    toggleEnterModal = () => {
+        this.resetPage();
+        this.setState({isEnterClosed: !this.state.isEnterClosed})
     };
     
     resetPage = () => {
-        if (!this.state.isClosed) {
-            this.setState({isClosed: true})
+        if (!this.state.isInfoClosed) {
+            this.setState({isInfoClosed: true})
+        }
+        if (!this.state.isEnterClosed) {
+            this.setState({isEnterClosed: true})
         }
     };
     
@@ -42,14 +53,25 @@ export default class Home extends PureComponent {
     render() {
         const infoModalClass = classNames(
             'info-message-modal',
-            {'info-message-modal hidden': this.state.isClosed,}
+            {'info-message-modal hidden': this.state.isInfoClosed,}
+        );
+        const enterModalClass = classNames(
+            'enter-modal',
+            {'enter-modal hidden': this.state.isEnterClosed,}
         );
         return (
-            <div className="home" onClick={this.resetPage}>
+            <div className="home">
                 <div className="header">
                     <div className="logo"><a href="/"><img src={Logo}/></a></div>
-                    <div className="log-in">{this.state.txtLogin}
-                        <div className="highlighting"/>
+                    <div className="log-in" onClick={this.toggleEnterModal}>
+                        {
+                            this.state.isEnterClosed ?
+                                <span>{this.state.txtLogin}
+                                    <div className="highlighting"/></span> :
+                                <span>
+                                    <img src={ArrowLeft}/>{this.state.txtBack}
+                                    <div className="highlighting"/></span>
+                        }
                     </div>
                 </div>
                 <div className="content">
@@ -66,18 +88,22 @@ export default class Home extends PureComponent {
                             <div>{this.state.txtInfoMessage}</div>
                         </div>
                     </div>
+                    <div className={enterModalClass}>
+                        <Enter/>
+                    </div>
                 </div>
                 <div className="footer">
                     <div className="info" onClick={this.toggleInfoMessageModal}>
                         {
-                            this.state.isClosed ?
+                            this.state.isInfoClosed ?
                                 <span>{this.state.txtInfo}
                                     <div className="highlighting"/></span> :
-                                <span><img src={ArrowLeft}/>{this.state.txtBack}</span>
+                                <span>
+                                    <img src={ArrowLeft}/>{this.state.txtBack}
+                                    <div className="highlighting"/></span>
                         }
                     </div>
                 </div>
-            
             </div>
         );
     }
