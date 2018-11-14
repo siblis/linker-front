@@ -1,0 +1,11 @@
+{
+  "txtEnter": "Вход",
+  "txtRegistration": "Регистрация",
+  "txtUserName": "Логин или e-mail",
+  "txtEmail": "E-mail",
+  "txtPassword": "Пароль",
+  "txtButtonEnter": "Войти",
+  "txtButtonRegistration": "Создать аккаунт",
+  "txtInvalidEmail": "Указан неправильный формат E-mail.",
+  "txtEmptyPassword": "Не указан пароль"
+}

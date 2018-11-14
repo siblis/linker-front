@@ -1,0 +1,11 @@
+{
+  "txtEnter": "Log in",
+  "txtRegistration": "Registration",
+  "txtUserName": "Login or e-mail",
+  "txtEmail": "E-mail",
+  "txtPassword": "Password",
+  "txtButtonEnter": "Enter",
+  "txtButtonRegistration": "Create an account",
+  "txtInvalidEmail": "Invalid E-mail.",
+  "txtEmptyPassword": "Empty Password"
+}

@@ -1,27 +1,5 @@
 .home {
-  .highlighting {
-    position: absolute;
-    top: 14px;
-    left: 2px;
-    height: 18px;
-    width: 0;
-    z-index: -1;
-    transition: width 0.4s;
-    background-color: #e99191;
-  }
-
   .header {
-    min-width: 300px;
-    .logo {
-      float: left;
-      margin: 42px 0 0 10%;
-      display: inline-block;
-      img {
-        width: 115px;
-        height: 42px;
-      }
-      cursor: pointer;
-    }
     .log-in {
       position: relative;
       float: right;
@@ -35,16 +13,15 @@
       text-align: right;
       color: #ffffff;
       cursor: pointer;
+      span > img {
+        position: absolute;
+        left: 9px;
+        top: 16px;
+      }
     }
     .log-in:hover .highlighting {
       width: 115px;
     }
-  }
-
-  .header:after {
-    content: " ";
-    display: block;
-    clear: both
   }
 
   .content {
@@ -58,7 +35,7 @@
       z-index: -1;
     }
     .text-block {
-      padding: calc(100vh - 420px) 0 0 calc(50% - 380px);
+      padding: 260px 0 0 calc(50% - 380px);
       color: #ffffff;
       .about {
         width: 588px;
@@ -71,36 +48,6 @@
         font-size: 36px;
         font-weight: bold;
         line-height: 1.19;
-      }
-    }
-    .info-message-modal {
-      position: absolute;
-      z-index: 1;
-      top: -3px;
-      left: calc(10% + 115px);
-      width: calc(80% - 228px);
-      height: calc(100vh - 150px);
-      text-align: left;
-      background-color: #e99191;
-      overflow: hidden;
-      .info-message-header {
-        margin: 30px 0 0 98px;
-        font-size: 36px;
-        font-weight: bold;
-        line-height: 1.19;
-        color: #ffffff;
-      }
-      .info-message {
-        margin: 15px 0 29px 40px;
-        font-size: 20px;
-        line-height: 1.4;
-        color: #ffffff;
-        overflow-y: scroll;
-        direction: rtl;
-        div {
-          padding: 0 39px;
-          height: calc(100vh - 300px);
-        }
       }
     }
   }
@@ -121,34 +68,23 @@
     }
   }
 
-  @media all and (max-width: 800px) {
+  @media all and (max-width: 960px) and (orientation: landscape) {
     .content {
-      .info-message-modal {
-        top: 3px;
-        left: 5%;
-        width: 90%;
-        .info-message-header {
-          margin: 15px 0 10px 30px;
-          font-size: 30px;
-          font-weight: bold;
-          line-height: 1.19;
-          color: #ffffff;
+      .text-block {
+        padding: 5% 10px 0 60px;
+        .about {
+          font-size: 14px;
+          width: 95%;
         }
-        .info-message {
-          margin: 0 0 0 5px;
-          font-size: 20px;
-          line-height: 1.4;
-          color: #ffffff;
-          overflow-y: scroll;
-          direction: rtl;
-          div {
-            padding: 0 15px;
-            height: calc(100vh - 245px);
-          }
+        .title {
+          margin: 10px 0 0 0;
+          font-size: 24px;
+          width: 95%;
         }
       }
     }
   }
+
   .content:after {
     content: " ";
     display: block;
