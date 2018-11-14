@@ -5,5 +5,7 @@
   "txtEmail": "E-mail",
   "txtPassword": "Пароль",
   "txtButtonEnter": "Войти",
-  "txtButtonRegistration": "Создать аккаунт"
+  "txtButtonRegistration": "Создать аккаунт",
+  "txtInvalidEmail": "Указан неправильный формат E-mail.",
+  "txtEmptyPassword": "Не указан пароль"
 }
