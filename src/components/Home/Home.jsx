@@ -6,6 +6,7 @@ import React, {PureComponent} from 'react';
 import classNames from 'classnames';
 import canvasApp from './canvasApp';
 import Enter from '../Enter/Enter';
+import Info from '../Info/Info';
 
 export default class Home extends PureComponent {
     constructor(props) {
@@ -16,8 +17,6 @@ export default class Home extends PureComponent {
             txtTitle: '',
             txtInfo: '',
             txtBack: '',
-            txtInfoMessageHeader: '',
-            txtInfoMessage: '',
             isInfoClosed: true,
             isEnterClosed: true,
         };
@@ -47,7 +46,7 @@ export default class Home extends PureComponent {
         fetch(`/resources/locale/${lang}/home.json`)
             .then(response => response.json())
             .then(data => this.setState(data));
-        canvasApp(this.refs.canvas);
+        //canvasApp(this.refs.canvas);
     }
     
     render() {
@@ -83,10 +82,7 @@ export default class Home extends PureComponent {
                         <div className="title">{this.state.txtTitle}</div>
                     </div>
                     <div className={infoModalClass}>
-                        <div className="info-message-header">{this.state.txtInfoMessageHeader}</div>
-                        <div className="info-message">
-                            <div>{this.state.txtInfoMessage}</div>
-                        </div>
+                       <Info/>
                     </div>
                     <div className={enterModalClass}>
                         <Enter/>

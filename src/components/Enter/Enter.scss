@@ -15,7 +15,6 @@
     width: 49%;
     padding: 3% 7%;
     box-sizing: border-box;
-    height: calc(100vh - 150px);
     background-color: #e99191;
   }
 
@@ -24,14 +23,11 @@
     width: 49%;
     padding: 3% 7%;
     box-sizing: border-box;
-    height: calc(100vh - 150px);
     background-color: #e99191;
   }
 
   .enter-section, .registration-section {
     .title-block {
-      width: 82px;
-      height: 43px;
       font-size: 30px;
       font-weight: bold;
       line-height: 1.19;
@@ -41,13 +37,19 @@
     .input-blocks {
       height: 55vh;
       margin: 16px 0 0 0;
+      .error-message {
+        color: #ffffff;
+        font-size: 18px;
+        padding-left: 10px;
+        overflow-wrap: break-word;
+      }
     }
     input {
       display: block;
       height: 47px;
       width: 100%;
       border: 2px white solid;
-      margin: 0 0 32px 0;
+      margin: 0 0 20px 0;
       padding: 12px 14px;
       background-color: #e99191;
       font-size: 18px;
@@ -69,17 +71,13 @@
       font-weight: bold;
       line-height: 1.4;
       color: #e99191;
+      outline: none;
+      cursor: pointer;
     }
   }
 }
 
 @media all and (max-width: 900px) {
-  ::-webkit-scrollbar-button {
-    width: 10px;
-  }
-  ::-webkit-scrollbar {
-    width: 9px;
-  }
   .enter-modal {
     top: 3px;
     left: 5%;
@@ -92,28 +90,18 @@
     .registration-section {
       float: left;
       width: 100%;
-      margin: 30px 0 0 0;
+      margin: 10px 0 0 0;
+      height: 75vh;
     }
-    .enter-section {
+    .enter-section, .registration-section {
       .input-blocks {
-        height: 48vh;
-      }
-    }
-    .registration-section {
-      .input-blocks {
-        height: 48vh;
+        height: 50vh;
       }
     }
   }
 }
 
 @media all and (max-width: 960px) and (orientation: landscape) {
-  ::-webkit-scrollbar-button {
-    width: 10px;
-  }
-  ::-webkit-scrollbar {
-    width: 9px;
-  }
   .enter-modal {
     top: 3px;
     left: 5%;
@@ -126,17 +114,12 @@
     .registration-section {
       float: left;
       width: 100%;
-      margin: 30px 0 0 0;
-      height: 130vh;
+      margin: 10px 0 0 0;
+      height: 100vh;
     }
-    .enter-section {
+    .enter-section, .registration-section  {
       .input-blocks {
         height: 55vh;
-      }
-    }
-    .registration-section {
-      .input-blocks {
-        height: 85vh;
       }
     }
   }

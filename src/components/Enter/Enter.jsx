@@ -9,12 +9,12 @@ export default class Enter extends PureComponent {
             txtEnter: '',
             txtRegistration: '',
             txtUserName: '',
-            txtLogin: '',
             txtEmail: '',
             txtPassword: '',
             txtButtonEnter: '',
-            txtButtonRegistration: ''
-            
+            txtButtonRegistration: '',
+            errorMessageEnter: 'Test enter dsvewbvb erebgweqgf3fgtr23gtfwvb342g423bgwergv23',
+            errorMessageRegistration: 'Test registration'
         };
     }
     
@@ -35,6 +35,7 @@ export default class Enter extends PureComponent {
                     <div className="input-blocks">
                         <input type="text" placeholder={this.state.txtUserName}/>
                         <input type="password" placeholder={this.state.txtPassword}/>
+                        <div className="error-message">{this.state.errorMessageEnter}</div>
                     </div>
                     <button>{this.state.txtButtonEnter}</button>
                 </div>
@@ -44,8 +45,8 @@ export default class Enter extends PureComponent {
                     </div>
                     <div className="input-blocks">
                         <input type="text" placeholder={this.state.txtEmail}/>
-                        <input type="text" placeholder={this.state.txtLogin}/>
-                        <input type="password" placeholder={this.state.txtPassword}/>
+                        <input type="text" placeholder={this.state.txtPassword}/>
+                        <div className="error-message">{this.state.errorMessageRegistration}</div>
                     </div>
                     <button>{this.state.txtButtonRegistration}</button>
                 </div>
