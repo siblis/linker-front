@@ -13,8 +13,8 @@ export default class Enter extends PureComponent {
             txtPassword: '',
             txtButtonEnter: '',
             txtButtonRegistration: '',
-            errorMessageEnter: 'Test enter dsvewbvb erebgweqgf3fgtr23gtfwvb342g423bgwergv23',
-            errorMessageRegistration: 'Test registration'
+            errorMessageEnter: '',
+            errorMessageRegistration: ''
         };
     }
     
