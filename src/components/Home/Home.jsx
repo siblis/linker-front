@@ -46,7 +46,7 @@ export default class Home extends PureComponent {
         fetch(`/resources/locale/${lang}/home.json`)
             .then(response => response.json())
             .then(data => this.setState(data));
-        //canvasApp(this.refs.canvas);
+        canvasApp(this.refs.canvas);
     }
     
     render() {
