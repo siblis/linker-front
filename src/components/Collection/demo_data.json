@@ -1,0 +1,31 @@
+{
+  "name": "Первая коллеция",
+  "comment": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Massa vitae tortor condimentum lacinia quis. Ut porttitor leo a diam sollicitudin. Faucibus turpis in eu mi bibendum neque. Ullamcorper dignissim cras tincidunt lobortis feugiat vivamus. Porta nibh venenatis cras sed. Nisl vel pretium lectus quam id leo in. Nulla pellentesque dignissim enim sit amet",
+  "links": [
+    {
+      "name": "Первый link",
+      "url": "http://sakh.com",
+      "comment": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt u"
+    },
+    {
+      "name": "Второй link",
+      "url": "http://linux.org.ru",
+      "comment": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt u"
+    },
+    {
+      "name": "Третий link",
+      "url": "http://habr.com",
+      "comment": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt u"
+    },
+    {
+      "name": "Четвертый link",
+      "url": "http://opennet.ru",
+      "comment": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt u"
+    },
+    {
+      "name": "Пятый link",
+      "url": "http://tass.ru",
+      "comment": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt u"
+    }
+  ]
+}

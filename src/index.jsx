@@ -1,18 +1,26 @@
 import './css/main.scss';
 
-import React, {PureComponent} from 'react';
+import React, {Component} from 'react';
 import ReactDom from 'react-dom';
+import {BrowserRouter, Switch, Route} from 'react-router-dom';
 
-import Home from 'components/Home';
+import routes from './routes';
 
-class App extends PureComponent {
+class App extends Component {
     render() {
         return (
             <div className="container">
-                <Home/>
+                <Switch>
+                    {routes.map((route, idx) => <Route key={idx} {...route} />)}
+                </Switch>
             </div>
         );
     }
 }
 
-ReactDom.render(<App/>, document.getElementById('root'));
+ReactDom.render(
+    <BrowserRouter>
+        <App/>
+    </BrowserRouter>,
+    document.getElementById('root')
+);

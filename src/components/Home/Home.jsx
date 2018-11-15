@@ -3,6 +3,7 @@ import Logo from '../../images/logo.png';
 import ArrowLeft from '../../images/arrow-left.png';
 
 import React, {PureComponent} from 'react';
+import {Link} from 'react-router-dom';
 import classNames from 'classnames';
 import canvasApp from './canvasApp';
 import Enter from '../Enter/Enter';
@@ -61,7 +62,7 @@ export default class Home extends PureComponent {
         return (
             <div className="home">
                 <div className="header">
-                    <div className="logo"><a href="/"><img src={Logo}/></a></div>
+                    <div className="logo"><Link to={'/'}><img src={Logo}/></Link></div>
                     <div className="log-in" onClick={this.toggleEnterModal}>
                         {
                             this.state.isEnterClosed ?
