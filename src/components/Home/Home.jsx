@@ -18,6 +18,7 @@ export default class Home extends PureComponent {
             txtTitle: '',
             txtInfo: '',
             txtBack: '',
+            txtDemo: '',
             isInfoClosed: true,
             isEnterClosed: true,
         };
@@ -99,6 +100,9 @@ export default class Home extends PureComponent {
                                     <img src={ArrowLeft}/>{this.state.txtBack}
                                     <div className="highlighting"/></span>
                         }
+                    </div>
+                    <div className="demo-collection">
+                        <Link to="/collection">{this.state.txtDemo}<div className="highlighting"/></Link>
                     </div>
                 </div>
             </div>

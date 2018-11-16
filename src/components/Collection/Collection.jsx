@@ -1,5 +1,4 @@
 import './Collection.scss';
-import data from './demo_data.json';
 
 import React, {PureComponent, Fragment} from 'react';
 import {Link} from 'react-router-dom';
@@ -16,9 +15,16 @@ export default class Collection extends PureComponent {
     componentDidMount() {
         const {match} = this.props;
         const hash = match.params.hash;
-        this.setState({
-            data: data
-        })
+        if (hash === undefined) {
+            fetch('/resources/data/demo-collection.json')
+                .then(response => response.json())
+                .then(demoData => this.setState({
+                    data: demoData
+                }));
+        } else {
+            this.props.history.push('/')
+        }
+        
     }
     
     render() {

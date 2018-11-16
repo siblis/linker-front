@@ -74,6 +74,10 @@ module.exports = {
             {
                 from: 'src/locale',
                 to: 'resources/locale'
+            },
+            {
+                from: 'src/data',
+                to: 'resources/data'
             }
         ]),
     ]
