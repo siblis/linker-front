@@ -3,6 +3,7 @@ import Logo from '../../images/logo.png';
 import ArrowLeft from '../../images/arrow-left.png';
 
 import React, {PureComponent} from 'react';
+import {Link} from 'react-router-dom';
 import classNames from 'classnames';
 import canvasApp from './canvasApp';
 import Enter from '../Enter/Enter';
@@ -17,6 +18,7 @@ export default class Home extends PureComponent {
             txtTitle: '',
             txtInfo: '',
             txtBack: '',
+            txtDemo: '',
             isInfoClosed: true,
             isEnterClosed: true,
         };
@@ -61,7 +63,7 @@ export default class Home extends PureComponent {
         return (
             <div className="home">
                 <div className="header">
-                    <div className="logo"><a href="/"><img src={Logo}/></a></div>
+                    <div className="logo"><Link to={'/'}><img src={Logo}/></Link></div>
                     <div className="log-in" onClick={this.toggleEnterModal}>
                         {
                             this.state.isEnterClosed ?
@@ -98,6 +100,9 @@ export default class Home extends PureComponent {
                                     <img src={ArrowLeft}/>{this.state.txtBack}
                                     <div className="highlighting"/></span>
                         }
+                    </div>
+                    <div className="demo-collection">
+                        <Link to="/collection">{this.state.txtDemo}<div className="highlighting"/></Link>
                     </div>
                 </div>
             </div>
