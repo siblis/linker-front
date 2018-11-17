@@ -14,6 +14,7 @@ export default class Enter extends PureComponent {
             txtButtonEnter: '',
             txtButtonRegistration: '',
             txtInvalidEmail: '',
+            txtEmptyUserName: '',
             txtEmptyPassword: '',
             errorMessageEnter: '',
             errorMessageRegistration: '',
@@ -48,7 +49,17 @@ export default class Enter extends PureComponent {
         }
     };
     
-    validateEmailPassword = (email, password) => {
+    validateAuthParams = (email, password) => {
+        if (!email.trim().length) {
+            return this.state.txtEmptyUserName;
+        }
+        if (!password.trim().length) {
+            return this.state.txtEmptyPassword;
+        }
+        return '';
+    };
+    
+    validateRegParams = (email, password) => {
         if (!/([a-zA-Z0-9-_\\.]+)(@)([a-zA-Z0-9-_\\.]+)\.([a-z]{2,})/.test(email)) {
             return this.state.txtInvalidEmail;
         }
@@ -59,7 +70,7 @@ export default class Enter extends PureComponent {
     };
     
     authorization = (email, password) => {
-        const errors = this.validateEmailPassword(email,password);
+        const errors = this.validateAuthParams(email, password);
         if (errors === '') {
             // Запрос авторизации
         } else {
@@ -70,7 +81,7 @@ export default class Enter extends PureComponent {
     };
     
     registration = (email, password) => {
-        const errors = this.validateEmailPassword(email,password);
+        const errors = this.validateRegParams(email, password);
         if (errors === '') {
             // Запрос регистрации
         } else {
