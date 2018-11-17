@@ -7,7 +7,7 @@ export default class Info extends PureComponent {
         super(props);
         this.state = {
             txtInfoMessageHeader: '',
-            txtInfoMessage: ''
+            txtInfoMessage: {__html: ''}
         };
     }
     
@@ -15,7 +15,13 @@ export default class Info extends PureComponent {
         const lang = (navigator.languages ? navigator.languages[0] : navigator.language) === 'ru' ? 'ru' : 'en';
         fetch(`/resources/locale/${lang}/info.json`)
             .then(response => response.json())
-            .then(data => this.setState(data));
+            .then(data => {
+                const html = data.txtInfoMessage.__html.join("");
+                this.setState({
+                    txtInfoMessageHeader: data.txtInfoMessageHeader,
+                    txtInfoMessage: {__html: html}
+                })
+            });
     }
     
     render() {
@@ -23,7 +29,7 @@ export default class Info extends PureComponent {
             <div>
                 <div className="info-message-header">{this.state.txtInfoMessageHeader}</div>
                 <div className="info-message">
-                    <div>{this.state.txtInfoMessage}</div>
+                    <div dangerouslySetInnerHTML={this.state.txtInfoMessage}/>
                 </div>
             </div>
         );
