@@ -6,7 +6,7 @@
   "txtPassword": "Password",
   "txtButtonEnter": "Enter",
   "txtButtonRegistration": "Create an account",
-  "txtInvalidEmail": "Invalid E-mail.",
+  "txtInvalidEmail": "Invalid e-mail",
   "txtEmptyPassword": "Empty Password",
   "txtEmptyUserName": "Empty login or e-mail"
 }

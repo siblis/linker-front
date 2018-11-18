@@ -1,8 +1,9 @@
 import './Enter.scss';
 
-import React, {PureComponent} from 'react';
+import React, {Component} from 'react';
 
-export default class Enter extends PureComponent {
+export default class Enter extends Component {
+    
     constructor(props) {
         super(props);
         this.state = {
@@ -18,7 +19,7 @@ export default class Enter extends PureComponent {
             txtEmptyPassword: '',
             errorMessageEnter: '',
             errorMessageRegistration: '',
-            enterEmail: '',
+            enterUserName: '',
             enterPassword: '',
             registrationEmail: '',
             registrationPassword: ''
@@ -41,7 +42,7 @@ export default class Enter extends PureComponent {
     handleButtonClick = (event) => {
         switch (event.target.name) {
             case 'enter':
-                this.authorization(this.state.enterEmail, this.state.enterPassword);
+                this.authorization(this.state.enterUserName, this.state.enterPassword);
                 break;
             case 'registration':
                 this.registration(this.state.registrationEmail, this.state.registrationPassword);
@@ -49,8 +50,8 @@ export default class Enter extends PureComponent {
         }
     };
     
-    validateAuthParams = (email, password) => {
-        if (!email.trim().length) {
+    validateAuthParams = (userName, password) => {
+        if (!userName.trim().length) {
             return this.state.txtEmptyUserName;
         }
         if (!password.trim().length) {
@@ -69,8 +70,8 @@ export default class Enter extends PureComponent {
         return '';
     };
     
-    authorization = (email, password) => {
-        const errors = this.validateAuthParams(email, password);
+    authorization = (userName, password) => {
+        const errors = this.validateAuthParams(userName, password);
         if (errors === '') {
             // Запрос авторизации
         } else {
@@ -92,7 +93,7 @@ export default class Enter extends PureComponent {
     };
     
     render() {
-        const {enterEmail, enterPassword, registrationEmail, registrationPassword} = this.state;
+        const {enterUserName, enterPassword, registrationEmail, registrationPassword} = this.state;
         return (
             <div>
                 <div className="enter-section">
@@ -100,9 +101,9 @@ export default class Enter extends PureComponent {
                         {this.state.txtEnter}
                     </div>
                     <div className="input-blocks">
-                        <input name="enterEmail"
+                        <input name="enterUserName"
                                type="text"
-                               value={enterEmail}
+                               value={enterUserName}
                                onChange={this.handleInputChange}
                                placeholder={this.state.txtUserName}/>
                         <input name="enterPassword"

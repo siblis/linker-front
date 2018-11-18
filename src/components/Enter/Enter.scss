@@ -3,30 +3,26 @@
   z-index: 1;
   top: -3px;
   left: calc(10% + 115px);
-  width: calc(80% - 228px);
-  height: calc(100vh - 150px);
+  width: calc(80% - 210px);
   text-align: left;
   background-color: #001;
   overflow-y: scroll;
 
   .enter-section {
-    position: relative;
     float: left;
-    width: 49%;
-    padding: 3% 7%;
-    box-sizing: border-box;
-    background-color: #e99191;
   }
 
   .registration-section {
     float: right;
-    width: 49%;
-    padding: 3% 7%;
-    box-sizing: border-box;
-    background-color: #e99191;
   }
 
   .enter-section, .registration-section {
+    position: relative;
+    width: 49%;
+    padding: 16px 20px;
+    box-sizing: border-box;
+    background-color: #e99191;
+    height: calc(100vh - 150px);
     .title-block {
       font-size: 30px;
       font-weight: bold;
@@ -35,11 +31,10 @@
       color: #ffffff;
     }
     .input-blocks {
-      height: 55vh;
       margin: 16px 0 0 0;
       .error-message {
         color: #ffffff;
-        font-size: 18px;
+        font-size: 16px;
         padding-left: 10px;
         overflow-wrap: break-word;
       }
@@ -62,8 +57,11 @@
       color: white;
     }
     button {
+      position: absolute;
+      left: 20px;
+      bottom: 20px;
       display: block;
-      width: 100%;
+      width: calc(100% - 40px);
       height: 46px;
       background-color: #fff;
       border: none;
@@ -82,21 +80,13 @@
     top: 3px;
     left: 5%;
     width: 90%;
-    .enter-section {
+    .enter-section, .registration-section {
       float: left;
       width: 100%;
-      height: 75vh;
+      height: 70vh;
     }
     .registration-section {
-      float: left;
-      width: 100%;
       margin: 10px 0 0 0;
-      height: 75vh;
-    }
-    .enter-section, .registration-section {
-      .input-blocks {
-        height: 50vh;
-      }
     }
   }
 }
@@ -106,21 +96,13 @@
     top: 3px;
     left: 5%;
     width: 90%;
-    .enter-section {
+    .enter-section, .registration-section  {
       float: left;
       width: 100%;
       height: 100vh;
     }
     .registration-section {
-      float: left;
-      width: 100%;
       margin: 10px 0 0 0;
-      height: 100vh;
-    }
-    .enter-section, .registration-section  {
-      .input-blocks {
-        height: 55vh;
-      }
     }
   }
 }
