@@ -4,9 +4,12 @@
   "txtUserName": "Login or e-mail",
   "txtEmail": "E-mail",
   "txtPassword": "Password",
+  "txtRepeatPassword": "Repeat password",
   "txtButtonEnter": "Enter",
   "txtButtonRegistration": "Create an account",
   "txtInvalidEmail": "Invalid e-mail",
   "txtEmptyPassword": "Empty Password",
-  "txtEmptyUserName": "Empty login or e-mail"
+  "txtEmptyUserName": "Empty login or e-mail",
+  "txtNoMatchPassword": "Passwords do not match"
+
 }

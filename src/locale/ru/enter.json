@@ -4,9 +4,11 @@
   "txtUserName": "Логин или e-mail",
   "txtEmail": "E-mail",
   "txtPassword": "Пароль",
+  "txtRepeatPassword": "Повторите пароль",
   "txtButtonEnter": "Войти",
   "txtButtonRegistration": "Создать аккаунт",
   "txtInvalidEmail": "Неправильный формат e-mail",
   "txtEmptyPassword": "Не указан пароль",
-  "txtEmptyUserName": "Не указан логин и e-mail"
+  "txtEmptyUserName": "Не указан логин и e-mail",
+  "txtNoMatchPassword": "Пароли не совпадают"
 }

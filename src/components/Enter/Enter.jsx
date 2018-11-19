@@ -12,6 +12,8 @@ export default class Enter extends Component {
             txtUserName: '',
             txtEmail: '',
             txtPassword: '',
+            txtRepeatPassword: '',
+            txtNoMatchPassword: '',
             txtButtonEnter: '',
             txtButtonRegistration: '',
             txtInvalidEmail: '',
@@ -21,8 +23,9 @@ export default class Enter extends Component {
             errorMessageRegistration: '',
             enterUserName: '',
             enterPassword: '',
-            registrationEmail: '',
-            registrationPassword: ''
+            regEmail: '',
+            regPassword: '',
+            regRepeatPassword: ''
         };
     }
     
@@ -45,7 +48,7 @@ export default class Enter extends Component {
                 this.authorization(this.state.enterUserName, this.state.enterPassword);
                 break;
             case 'registration':
-                this.registration(this.state.registrationEmail, this.state.registrationPassword);
+                this.registration(this.state.regEmail, this.state.regPassword, this.state.regRepeatPassword);
                 break;
         }
     };
@@ -60,12 +63,16 @@ export default class Enter extends Component {
         return '';
     };
     
-    validateRegParams = (email, password) => {
+    validateRegParams = (email, password, repeatPassword) => {
         if (!/([a-zA-Z0-9-_\\.]+)(@)([a-zA-Z0-9-_\\.]+)\.([a-z]{2,})/.test(email)) {
             return this.state.txtInvalidEmail;
         }
-        if (!password.trim().length) {
+        if (!password.trim().length || !repeatPassword.trim().length) {
             return this.state.txtEmptyPassword;
+        }
+        if (password !== repeatPassword) {
+            console.log('Ok');
+            return this.state.txtNoMatchPassword;
         }
         return '';
     };
@@ -81,8 +88,8 @@ export default class Enter extends Component {
         }
     };
     
-    registration = (email, password) => {
-        const errors = this.validateRegParams(email, password);
+    registration = (email, password, repeatPassword) => {
+        const errors = this.validateRegParams(email, password, repeatPassword);
         if (errors === '') {
             // Запрос регистрации
         } else {
@@ -93,7 +100,7 @@ export default class Enter extends Component {
     };
     
     render() {
-        const {enterUserName, enterPassword, registrationEmail, registrationPassword} = this.state;
+        const {enterUserName, enterPassword, regEmail, regPassword, regRepeatPassword} = this.state;
         return (
             <div>
                 <div className="enter-section">
@@ -122,16 +129,21 @@ export default class Enter extends Component {
                         {this.state.txtRegistration}
                     </div>
                     <div className="input-blocks">
-                        <input name="registrationEmail"
+                        <input name="regEmail"
                                type="text"
-                               value={registrationEmail}
+                               value={regEmail}
                                onChange={this.handleInputChange}
                                placeholder={this.state.txtEmail}/>
-                        <input name="registrationPassword"
+                        <input name="regPassword"
                                type="text"
-                               value={registrationPassword}
+                               value={regPassword}
                                onChange={this.handleInputChange}
                                placeholder={this.state.txtPassword}/>
+                        <input name="regRepeatPassword"
+                               type="text"
+                               value={regRepeatPassword}
+                               onChange={this.handleInputChange}
+                               placeholder={this.state.txtRepeatPassword}/>
                         <div className="error-message">{this.state.errorMessageRegistration}</div>
                     </div>
                     <button name="registration" onClick={this.handleButtonClick}>
