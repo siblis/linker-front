@@ -1,8 +1,11 @@
 import './Enter.scss';
 
 import React, {Component} from 'react';
+import {withRouter} from 'react-router-dom';
+import Cookies from 'js-cookie';
+import config from '../../config';
 
-export default class Enter extends Component {
+class Enter extends Component {
     
     constructor(props) {
         super(props);
@@ -19,8 +22,12 @@ export default class Enter extends Component {
             txtInvalidEmail: '',
             txtEmptyUserName: '',
             txtEmptyPassword: '',
-            errorMessageEnter: '',
-            errorMessageRegistration: '',
+            txtFailEnter: [],
+            txtFailReg: [],
+            txtSystemError: '',
+            txtWait: '',
+            messageEnter: '',
+            messageRegistration: '',
             enterUserName: '',
             enterPassword: '',
             regEmail: '',
@@ -71,19 +78,79 @@ export default class Enter extends Component {
             return this.state.txtEmptyPassword;
         }
         if (password !== repeatPassword) {
-            console.log('Ok');
             return this.state.txtNoMatchPassword;
         }
         return '';
     };
     
+    saveAuthData = (email, token) => {
+        Cookies.set('user', {email: email, token: token});
+    };
+    
+    processAuthResponse = (response) => {
+        switch (response.status) {
+            case 302:
+                this.saveAuthData(this.state.enterUserName, response['token']);
+                this.props.history.push('/cabinet');
+                break;
+            case 422:
+                this.setState({
+                    messageEnter: this.state.txtFailEnter[response.status - 422]
+                });
+                break;
+        }
+    };
+    
+    processRegResponse = (response) => {
+        switch (response.status) {
+            case 201:
+                this.saveAuthData(this.state.regEmail, response['token']);
+                this.props.history.push('/cabinet');
+                break;
+            case 422:
+            case 423:
+            case 424:
+            case 425:
+                this.setState({
+                    messageRegistration: this.state.txtFailReg[response.status - 422]
+                });
+                break;
+        }
+    };
+    
     authorization = (userName, password) => {
         const errors = this.validateAuthParams(userName, password);
         if (errors === '') {
+            this.setState({
+                messageEnter: this.state.txtWait
+            });
             // Запрос авторизации
+            fetch(`${config.api}/sign_in`, {
+                method: 'POST',
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    'email': userName,
+                    'password': password
+                })
+            }).then((response) => {
+                if (response.status !== 200) {
+                    throw new Error(response.statusText);
+                }
+                return response.json()
+            }).then((data) => {
+                this.processAuthResponse(data);
+            }).catch(error => {
+                this.setState({
+                    messageEnter: this.state.txtSystemError
+                });
+                console.log(error);
+            });
         } else {
             this.setState({
-                errorMessageEnter: errors
+                messageEnter: errors
             });
         }
     };
@@ -91,10 +158,37 @@ export default class Enter extends Component {
     registration = (email, password, repeatPassword) => {
         const errors = this.validateRegParams(email, password, repeatPassword);
         if (errors === '') {
+            this.setState({
+                messageRegistration: this.state.txtWait
+            });
             // Запрос регистрации
+            fetch(`${config.api}/sign_up`, {
+                method: 'POST',
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    'email': email,
+                    'password': password,
+                    'password_confirmation': password
+                })
+            }).then((response) => {
+                if (response.status !== 200) {
+                    throw new Error(response.statusText);
+                }
+                return response.json();
+            }).then((data) => {
+                this.processRegResponse(data);
+            }).catch(error => {
+                this.setState({
+                    messageRegistration: this.state.txtSystemError
+                });
+                console.log(error)
+            });
         } else {
             this.setState({
-                errorMessageRegistration: errors
+                messageRegistration: errors
             });
         }
     };
@@ -118,7 +212,7 @@ export default class Enter extends Component {
                                value={enterPassword}
                                onChange={this.handleInputChange}
                                placeholder={this.state.txtPassword}/>
-                        <div className="error-message">{this.state.errorMessageEnter}</div>
+                        <div className="error-message">{this.state.messageEnter}</div>
                     </div>
                     <button name="enter" onClick={this.handleButtonClick}>
                         {this.state.txtButtonEnter}
@@ -135,16 +229,16 @@ export default class Enter extends Component {
                                onChange={this.handleInputChange}
                                placeholder={this.state.txtEmail}/>
                         <input name="regPassword"
-                               type="text"
+                               type="password"
                                value={regPassword}
                                onChange={this.handleInputChange}
                                placeholder={this.state.txtPassword}/>
                         <input name="regRepeatPassword"
-                               type="text"
+                               type="password"
                                value={regRepeatPassword}
                                onChange={this.handleInputChange}
                                placeholder={this.state.txtRepeatPassword}/>
-                        <div className="error-message">{this.state.errorMessageRegistration}</div>
+                        <div className="error-message">{this.state.messageRegistration}</div>
                     </div>
                     <button name="registration" onClick={this.handleButtonClick}>
                         {this.state.txtButtonRegistration}
@@ -154,3 +248,5 @@ export default class Enter extends Component {
         );
     }
 }
+
+export default withRouter(Enter);
