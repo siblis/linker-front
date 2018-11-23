@@ -3,6 +3,7 @@ import './Collection.scss';
 import React, {PureComponent, Fragment} from 'react';
 import {Link} from 'react-router-dom';
 import Logo from '../../images/logo.png';
+import config from '../../config';
 
 export default class Collection extends PureComponent {
     constructor(props) {
@@ -22,7 +23,23 @@ export default class Collection extends PureComponent {
                     data: demoData
                 }));
         } else {
-            this.props.history.push('/')
+            // Запрос коллекции
+            fetch(`${config.api}/collection/${hash}`, {
+                method: 'GET',
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json',
+                }
+            }).then((response) => {
+                if (response.status !== 200) {
+                    throw new Error(response.statusText);
+                }
+                return response.json();
+            }).then((data) => this.setState({
+                data: data
+            })).catch(error => {
+                this.props.history.push('/');
+            });
         }
         
     }
