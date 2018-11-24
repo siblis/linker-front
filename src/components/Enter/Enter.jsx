@@ -1,8 +1,12 @@
 import './Enter.scss';
 
-import React, {PureComponent} from 'react';
+import React, {Component} from 'react';
+import {withRouter} from 'react-router-dom';
+import Cookies from 'js-cookie';
+import config from '../../config';
 
-export default class Enter extends PureComponent {
+class Enter extends Component {
+    
     constructor(props) {
         super(props);
         this.state = {
@@ -11,17 +15,24 @@ export default class Enter extends PureComponent {
             txtUserName: '',
             txtEmail: '',
             txtPassword: '',
+            txtRepeatPassword: '',
+            txtNoMatchPassword: '',
             txtButtonEnter: '',
             txtButtonRegistration: '',
             txtInvalidEmail: '',
             txtEmptyUserName: '',
             txtEmptyPassword: '',
-            errorMessageEnter: '',
-            errorMessageRegistration: '',
-            enterEmail: '',
+            txtFailEnter: [],
+            txtFailReg: [],
+            txtSystemError: '',
+            txtWait: '',
+            messageEnter: '',
+            messageRegistration: '',
+            enterUserName: '',
             enterPassword: '',
-            registrationEmail: '',
-            registrationPassword: ''
+            regEmail: '',
+            regPassword: '',
+            regRepeatPassword: ''
         };
     }
     
@@ -41,16 +52,16 @@ export default class Enter extends PureComponent {
     handleButtonClick = (event) => {
         switch (event.target.name) {
             case 'enter':
-                this.authorization(this.state.enterEmail, this.state.enterPassword);
+                this.authorization(this.state.enterUserName, this.state.enterPassword);
                 break;
             case 'registration':
-                this.registration(this.state.registrationEmail, this.state.registrationPassword);
+                this.registration(this.state.regEmail, this.state.regPassword, this.state.regRepeatPassword);
                 break;
         }
     };
     
-    validateAuthParams = (email, password) => {
-        if (!email.trim().length) {
+    validateAuthParams = (userName, password) => {
+        if (!userName.trim().length) {
             return this.state.txtEmptyUserName;
         }
         if (!password.trim().length) {
@@ -59,40 +70,131 @@ export default class Enter extends PureComponent {
         return '';
     };
     
-    validateRegParams = (email, password) => {
+    validateRegParams = (email, password, repeatPassword) => {
         if (!/([a-zA-Z0-9-_\\.]+)(@)([a-zA-Z0-9-_\\.]+)\.([a-z]{2,})/.test(email)) {
             return this.state.txtInvalidEmail;
         }
-        if (!password.trim().length) {
+        if (!password.trim().length || !repeatPassword.trim().length) {
             return this.state.txtEmptyPassword;
+        }
+        if (password !== repeatPassword) {
+            return this.state.txtNoMatchPassword;
         }
         return '';
     };
     
-    authorization = (email, password) => {
-        const errors = this.validateAuthParams(email, password);
+    saveAuthData = (email, token) => {
+        Cookies.set('user', {email: email, token: token});
+    };
+    
+    processAuthResponse = (response) => {
+        switch (response.status) {
+            case 302:
+                this.saveAuthData(this.state.enterUserName, response['token']);
+                this.props.history.push('/cabinet');
+                break;
+            case 422:
+                this.setState({
+                    messageEnter: this.state.txtFailEnter[response.status - 422]
+                });
+                break;
+        }
+    };
+    
+    processRegResponse = (response) => {
+        switch (response.status) {
+            case 201:
+                this.saveAuthData(this.state.regEmail, response['token']);
+                this.props.history.push('/cabinet');
+                break;
+            case 422:
+            case 423:
+            case 424:
+            case 425:
+                this.setState({
+                    messageRegistration: this.state.txtFailReg[response.status - 422]
+                });
+                break;
+        }
+    };
+    
+    authorization = (userName, password) => {
+        const errors = this.validateAuthParams(userName, password);
         if (errors === '') {
+            this.setState({
+                messageEnter: this.state.txtWait
+            });
             // Запрос авторизации
+            fetch(`${config.api}/sign_in`, {
+                method: 'POST',
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    'email': userName,
+                    'password': password
+                })
+            }).then((response) => {
+                if (response.status !== 200) {
+                    throw new Error(response.statusText);
+                }
+                return response.json()
+            }).then((data) => {
+                this.processAuthResponse(data);
+            }).catch(error => {
+                this.setState({
+                    messageEnter: this.state.txtSystemError
+                });
+                console.log(error);
+            });
         } else {
             this.setState({
-                errorMessageEnter: errors
+                messageEnter: errors
             });
         }
     };
     
-    registration = (email, password) => {
-        const errors = this.validateRegParams(email, password);
+    registration = (email, password, repeatPassword) => {
+        const errors = this.validateRegParams(email, password, repeatPassword);
         if (errors === '') {
+            this.setState({
+                messageRegistration: this.state.txtWait
+            });
             // Запрос регистрации
+            fetch(`${config.api}/sign_up`, {
+                method: 'POST',
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    'email': email,
+                    'password': password,
+                    'password_confirmation': password
+                })
+            }).then((response) => {
+                if (response.status !== 200) {
+                    throw new Error(response.statusText);
+                }
+                return response.json();
+            }).then((data) => {
+                this.processRegResponse(data);
+            }).catch(error => {
+                this.setState({
+                    messageRegistration: this.state.txtSystemError
+                });
+                console.log(error)
+            });
         } else {
             this.setState({
-                errorMessageRegistration: errors
+                messageRegistration: errors
             });
         }
     };
     
     render() {
-        const {enterEmail, enterPassword, registrationEmail, registrationPassword} = this.state;
+        const {enterUserName, enterPassword, regEmail, regPassword, regRepeatPassword} = this.state;
         return (
             <div>
                 <div className="enter-section">
@@ -100,9 +202,9 @@ export default class Enter extends PureComponent {
                         {this.state.txtEnter}
                     </div>
                     <div className="input-blocks">
-                        <input name="enterEmail"
+                        <input name="enterUserName"
                                type="text"
-                               value={enterEmail}
+                               value={enterUserName}
                                onChange={this.handleInputChange}
                                placeholder={this.state.txtUserName}/>
                         <input name="enterPassword"
@@ -110,7 +212,7 @@ export default class Enter extends PureComponent {
                                value={enterPassword}
                                onChange={this.handleInputChange}
                                placeholder={this.state.txtPassword}/>
-                        <div className="error-message">{this.state.errorMessageEnter}</div>
+                        <div className="error-message">{this.state.messageEnter}</div>
                     </div>
                     <button name="enter" onClick={this.handleButtonClick}>
                         {this.state.txtButtonEnter}
@@ -121,17 +223,22 @@ export default class Enter extends PureComponent {
                         {this.state.txtRegistration}
                     </div>
                     <div className="input-blocks">
-                        <input name="registrationEmail"
+                        <input name="regEmail"
                                type="text"
-                               value={registrationEmail}
+                               value={regEmail}
                                onChange={this.handleInputChange}
                                placeholder={this.state.txtEmail}/>
-                        <input name="registrationPassword"
-                               type="text"
-                               value={registrationPassword}
+                        <input name="regPassword"
+                               type="password"
+                               value={regPassword}
                                onChange={this.handleInputChange}
                                placeholder={this.state.txtPassword}/>
-                        <div className="error-message">{this.state.errorMessageRegistration}</div>
+                        <input name="regRepeatPassword"
+                               type="password"
+                               value={regRepeatPassword}
+                               onChange={this.handleInputChange}
+                               placeholder={this.state.txtRepeatPassword}/>
+                        <div className="error-message">{this.state.messageRegistration}</div>
                     </div>
                     <button name="registration" onClick={this.handleButtonClick}>
                         {this.state.txtButtonRegistration}
@@ -141,3 +248,5 @@ export default class Enter extends PureComponent {
         );
     }
 }
+
+export default withRouter(Enter);

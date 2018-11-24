@@ -4,9 +4,15 @@
   "txtUserName": "Login or e-mail",
   "txtEmail": "E-mail",
   "txtPassword": "Password",
+  "txtRepeatPassword": "Repeat password",
   "txtButtonEnter": "Enter",
   "txtButtonRegistration": "Create an account",
-  "txtInvalidEmail": "Invalid E-mail.",
+  "txtInvalidEmail": "Invalid e-mail",
   "txtEmptyPassword": "Empty Password",
-  "txtEmptyUserName": "Empty login or e-mail"
+  "txtEmptyUserName": "Empty login or e-mail",
+  "txtNoMatchPassword": "Passwords do not match",
+  "txtWait": "Wait...",
+  "txtFailEnter": ["Invalid email and/or password"],
+  "txtSystemError": "Error. Contact your site administrator.",
+  "txtFailReg": ["Invalid e-mail format", "This e-mail is already registered", "Passwords do not match", "Password too short (minimum 6 characters)"]
 }
