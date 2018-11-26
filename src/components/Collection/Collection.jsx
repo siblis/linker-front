@@ -37,7 +37,7 @@ export default class Collection extends PureComponent {
                 return response.json();
             }).then((data) => this.setState({
                 data: data
-            })).catch(error => {
+            })).catch(() => {
                 this.props.history.push('/');
             });
         }
@@ -49,7 +49,7 @@ export default class Collection extends PureComponent {
         return (
             <Fragment>
                 <div className="header">
-                    <div className="logo"><Link to={'/'}><img src={Logo}/></Link></div>
+                    <div className="logo"><Link to={'/'}><img src={Logo} alt="logo"/></Link></div>
                 </div>
                 <div className="collection">
                     <div className="collection-header">
@@ -63,7 +63,7 @@ export default class Collection extends PureComponent {
                                     <h2>{link.name}</h2>
                                     <a href={link.url} target="_blank">{link.url}</a>
                                     <p>{link.comment}</p>
-                                    <img src={'https://api.letsvalidate.com/v1/thumbs?size=og&url=' + link.url}/>
+                                    <img src={config.thumbs + link.url} alt="logo"/>
                                 </div>
                             </Fragment>
                         )

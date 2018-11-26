@@ -1,0 +1,10 @@
+{
+  "txtCollectionName": "Название коллекции",
+  "txtDescription": "Описание",
+  "txtLinkUrl": "Ссылка",
+  "txtLinkName": "Название ссылки",
+  "txtSaveCollection": "Сохранить",
+  "txtDeleteCollection": "Удалить",
+  "txtNewCollection": "Новая коллекция",
+  "txtSystemError": "Ошибка. Обратитесь к администратору сайта."
+}
