@@ -63,14 +63,14 @@ export default class Home extends PureComponent {
         return (
             <div className="home">
                 <div className="header">
-                    <div className="logo"><Link to={'/'}><img src={Logo}/></Link></div>
+                    <div className="logo"><Link to={'/'}><img src={Logo} alt="logo"/></Link></div>
                     <div className="log-in" onClick={this.toggleEnterModal}>
                         {
                             this.state.isEnterClosed ?
                                 <span>{this.state.txtLogin}
                                     <div className="highlighting"/></span> :
                                 <span>
-                                    <img src={ArrowLeft}/>{this.state.txtBack}
+                                    <img src={ArrowLeft} alt="back"/>{this.state.txtBack}
                                     <div className="highlighting"/></span>
                         }
                     </div>
@@ -97,7 +97,7 @@ export default class Home extends PureComponent {
                                 <span>{this.state.txtInfo}
                                     <div className="highlighting"/></span> :
                                 <span>
-                                    <img src={ArrowLeft}/>{this.state.txtBack}
+                                    <img src={ArrowLeft} alt="back"/>{this.state.txtBack}
                                     <div className="highlighting"/></span>
                         }
                     </div>

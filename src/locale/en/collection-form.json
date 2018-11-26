@@ -1,0 +1,10 @@
+{
+  "txtCollectionName": "Collection name",
+  "txtDescription": "Description",
+  "txtLinkName": "Link name",
+  "txtLinkUrl": "URL",
+  "txtSaveCollection": "Save",
+  "txtDeleteCollection": "Delete",
+  "txtNewCollection": "New collection",
+  "txtSystemError": "Error. Contact your site administrator."
+}
