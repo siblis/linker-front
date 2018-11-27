@@ -5,6 +5,7 @@ import Cookies from 'js-cookie';
 import classNames from 'classnames';
 import {Link} from 'react-router-dom';
 import CollectionForm from '../CollectionForm/CollectionForm';
+import Profile from '../Profile/Profile';
 import Logo from '../../images/logo.png';
 import ArrowLeft from '../../images/arrow-left.png';
 import Plus from '../../images/plus.png';
@@ -87,7 +88,7 @@ export default class Cabinet extends Component {
             {'hidden': !this.state.isCollectionFormOpened}
         );
         const profileModalClass = classNames(
-            'profile-modal',
+            'profile',
             {'hidden': !this.state.isProfileOpened}
         );
         if (this.state.user === undefined) {
@@ -162,7 +163,7 @@ export default class Cabinet extends Component {
                         {
                             this.state.isProfileOpened ?
                                 <div className={profileModalClass}>
-                                    {/*<Profile/>*/}
+                                    <Profile/>
                                 </div> :
                                 ''
                         }
