@@ -64,11 +64,7 @@ class CollectionForm extends PureComponent {
             if (response.status !== 200) {
                 throw new Error(response.statusText);
             }
-            return response.json()
-        }).then((collection) => {
-            this.setState({
-                collection: collection
-            })
+            this.props.onClose();
         }).catch(() => {
             this.setErrorMessage(this.state.txtSystemError);
         });
@@ -117,11 +113,7 @@ class CollectionForm extends PureComponent {
             if (response.status !== 200) {
                 throw new Error(response.statusText);
             }
-            return response.json()
-        }).then((collection) => {
-            this.setState({
-                collection: collection
-            })
+            this.props.onClose();
         }).catch(() => {
             this.setErrorMessage(this.state.txtSystemError);
         });
@@ -236,6 +228,11 @@ class CollectionForm extends PureComponent {
                               onChange={this.handleInputChange}
                               placeholder={this.state.txtDescription}/>
                 </div>
+                <div className="collection-control">
+                    <button onClick={this.onDeleteCollection}>{this.state.txtDeleteCollection}</button>
+                    <button onClick={this.onSaveCollection}>{this.state.txtSaveCollection}</button>
+                    <div onClick={this.onAddLink}><img src={Plus} alt="Add link"/></div>
+                </div>
                 {
                     Array.from(collection.links).map((link, idx) =>
                         <div className="collection-link" key={idx}>
@@ -259,11 +256,6 @@ class CollectionForm extends PureComponent {
                         </div>
                     )
                 }
-                <div className="collection-control">
-                    <button onClick={this.onDeleteCollection}>{this.state.txtDeleteCollection}</button>
-                    <button onClick={this.onSaveCollection}>{this.state.txtSaveCollection}</button>
-                    <div onClick={this.onAddLink}><img src={Plus} alt="Add link"/></div>
-                </div>
             </Fragment>
         );
     }
