@@ -133,6 +133,9 @@ export default class Cabinet extends Component {
                                                     <div className="collection-name">
                                                         {collection.name}
                                                     </div>
+                                                    <div className="collection-url">
+                                                        {config.collectionBaseUrl + collection.url}
+                                                    </div>
                                                     <div className="collection-comment">
                                                         {collection.comment}
                                                     </div>
