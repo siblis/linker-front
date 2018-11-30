@@ -11,12 +11,14 @@
       font-weight: bold;
       line-height: 1.19;
       color: white;
+      word-break: break-all;
     }
     p {
       margin: 15px 0 0 0;
       font-size: 20px;
       line-height: 1.4;
       color: #ffffff;
+      word-break: break-all;
     }
   }
   .url-content{
@@ -30,6 +32,7 @@
       font-weight: bold;
       line-height: 1.2;
       color: #000011;
+      word-break: break-all;
     }
     a {
       padding: 10px 10px 0 10px;
@@ -42,11 +45,13 @@
       font-size: 20px;
       line-height: 1.4;
       color: #000011;
+      word-break: break-all;
     }
     img {
       width: 100%;
-      margin: 0 auto;
+      margin: 0 auto -5px;
     }
+
   }
  }
 
@@ -83,7 +88,7 @@
       }
       img {
         width: 100%;
-        margin: 10px auto 0 auto;
+        margin: 10px auto -5px auto;
       }
     }
   }

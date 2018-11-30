@@ -4,12 +4,25 @@
     padding: 35px 74px;
     background-color: #e99191;
     margin: 0 0 15px 0;
+
+    .collection-copy {
+      position: absolute;
+      right: 25px;
+      top: 40px;
+      cursor: pointer;
+    }
   }
 
   .collection-url {
     padding: 10px 0;
     font-size: 20px;
     word-break: break-all;
+    a {
+      font-size: 20px;
+      word-break: break-all;
+      color: white;
+    }
+
   }
 
   input[type=text] {
@@ -52,6 +65,7 @@
       position: absolute;
       right: 17px;
       top: 34px;
+      cursor: pointer;
     }
   }
 
@@ -74,6 +88,7 @@
     div {
       float: right;
       margin: 6px 18px 0 0;
+      cursor: pointer;
     }
 
     button {
@@ -105,7 +120,10 @@
 @media all and (max-width: 900px) {
   .collection-form {
     .collection-url {
-      font-size: 14px;
+      font-size: 16px;
+      a {
+        font-size: 16px;
+      }
     }
 
     .collection-error-message {
@@ -119,6 +137,13 @@
     input[type=text], textarea {
       font-size: 14px;
       padding: 11px;
+    }
+
+    .collection-head {
+      .collection-copy {
+        top: 25px;
+        right: 8px;
+      }
     }
 
     .collection-link {
