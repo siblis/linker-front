@@ -10,5 +10,7 @@
   "txtSystemError": "Error. Contact your site administrator.",
   "txtMakeDuplicateCollection": "Make a duplicate Collection",
   "txtDeleteLink": "Delete link",
-  "txtAddLink": "Add link"
+  "txtAddLink": "Add link",
+  "txtLinkIsCopied": "Link is copied to clipboard",
+  "txtCopyCollectionLink": "Copy collection link to clipboard"
 }

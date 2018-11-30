@@ -14,15 +14,23 @@
   }
 
   .collection-url {
-    padding: 10px 0;
     font-size: 20px;
     word-break: break-all;
+    height: 55px;
+    line-height: 46px;
     a {
       font-size: 20px;
       word-break: break-all;
       color: white;
     }
 
+    .collection-url-clipboard {
+      display: inline-block;
+      margin: 0 0 0 10px;
+      img {
+        vertical-align: middle;
+      }
+    }
   }
 
   input[type=text] {
@@ -121,6 +129,7 @@
   .collection-form {
     .collection-url {
       font-size: 16px;
+
       a {
         font-size: 16px;
       }

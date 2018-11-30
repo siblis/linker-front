@@ -4,10 +4,12 @@ import React, {PureComponent, Fragment} from 'react';
 import {withRouter, Link} from 'react-router-dom';
 import PropTypes from 'prop-types';
 import Cookies from 'js-cookie';
+import {CopyToClipboard} from 'react-copy-to-clipboard';
 import config from '../../config';
 import Plus from '../../images/plus.png';
 import Delete from '../../images/delete.png';
 import Copy from '../../images/copy.png';
+import Clipboard from '../../images/clipboard.png';
 
 class CollectionForm extends PureComponent {
     static propTypes = {
@@ -32,7 +34,10 @@ class CollectionForm extends PureComponent {
             txtMakeDuplicateCollection: '',
             txtDeleteLink: '',
             txtAddLink: '',
-            errorMessage: ''
+            txtLinkIsCopied: '',
+            txtCopyCollectionLink: '',
+            errorMessage: '',
+            isLinkCopied: false
         };
     }
     
@@ -216,7 +221,7 @@ class CollectionForm extends PureComponent {
     };
     
     render() {
-        const {collection, errorMessage} = this.state;
+        const {collection, errorMessage, isLinkCopied} = this.state;
         return (
             <Fragment>
                 {
@@ -229,12 +234,22 @@ class CollectionForm extends PureComponent {
                     {
                         collection.url === '' ?
                             this.state.txtNewCollection :
-                            <Link
-                                to={'/collection/' + collection.url}
-                                title={config.collectionBaseUrl + collection.url}
-                                target="_blank">
-                                {this.state.txtCollectionLink}
-                            </Link>
+                            isLinkCopied ? this.state.txtLinkIsCopied :
+                                <Fragment>
+                                    <Link
+                                        to={'/collection/' + collection.url}
+                                        title={config.collectionBaseUrl + collection.url}
+                                        target="_blank">
+                                        {this.state.txtCollectionLink}
+                                    </Link>
+                                    <CopyToClipboard text={config.collectionBaseUrl + collection.url}
+                                                     onCopy={() => this.setState({isLinkCopied: true})}>
+                                        <div className="collection-url-clipboard"
+                                             title={this.state.txtCopyCollectionLink}>
+                                            <img src={Clipboard} alt="Copy collection url to clipboard"/>
+                                        </div>
+                                    </CopyToClipboard>
+                                </Fragment>
                     }
                 </div>
                 <div className="collection-head">
