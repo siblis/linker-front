@@ -1,6 +1,7 @@
 import Home from 'components/Home';
 import Collection from 'components/Collection';
 import Cabinet from 'components/Cabinet';
+import NotFound from 'components/NotFound';
 
 export default [
     {
@@ -18,4 +19,14 @@ export default [
         component: Collection,
         exact: true
     },
+    {
+        path: '/not-found',
+        component: NotFound,
+        exact: true
+    },
+    {
+        path: '*',
+        component: NotFound,
+        exact: true
+    }
 ]

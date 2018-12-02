@@ -38,10 +38,9 @@ export default class Collection extends PureComponent {
             }).then((data) => this.setState({
                 data: data
             })).catch(() => {
-                this.props.history.push('/');
+                this.props.history.push('/not-found');
             });
         }
-        
     }
     
     render() {
