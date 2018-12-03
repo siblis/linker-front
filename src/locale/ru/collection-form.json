@@ -1,4 +1,5 @@
 {
+  "txtCollectionLink": "Ссылка на коллекцию",
   "txtCollectionName": "Название коллекции",
   "txtDescription": "Описание",
   "txtLinkUrl": "Ссылка",
@@ -6,5 +7,10 @@
   "txtSaveCollection": "Сохранить",
   "txtDeleteCollection": "Удалить",
   "txtNewCollection": "Новая коллекция",
-  "txtSystemError": "Ошибка. Обратитесь к администратору сайта."
+  "txtSystemError": "Ошибка. Обратитесь к администратору сайта.",
+  "txtMakeDuplicateCollection": "Сделать дубликат коллекции",
+  "txtDeleteLink": "Удалить ссылку",
+  "txtAddLink": "Добавить ссылку",
+  "txtLinkIsCopied": "Ссылка скопирована в буфер обмена",
+  "txtCopyCollectionLink": "Копировать ссылку в буфер обмена"
 }

@@ -3,12 +3,34 @@
     position: relative;
     padding: 35px 74px;
     background-color: #e99191;
-    margin: 0 0 30px 0;
+    margin: 0 0 15px 0;
+
+    .collection-copy {
+      position: absolute;
+      right: 25px;
+      top: 40px;
+      cursor: pointer;
+    }
   }
 
   .collection-url {
-    padding: 10px 0;
     font-size: 20px;
+    word-break: break-all;
+    height: 55px;
+    line-height: 46px;
+    a {
+      font-size: 20px;
+      word-break: break-all;
+      color: white;
+    }
+
+    .collection-url-clipboard {
+      display: inline-block;
+      margin: 0 0 0 10px;
+      img {
+        vertical-align: middle;
+      }
+    }
   }
 
   input[type=text] {
@@ -51,6 +73,7 @@
       position: absolute;
       right: 17px;
       top: 34px;
+      cursor: pointer;
     }
   }
 
@@ -68,16 +91,17 @@
   .collection-control {
     height: 46px;
     width: 100%;
-    padding: 0 0 10px 0;
+    padding: 0 0 15px 0;
 
     div {
       float: right;
       margin: 6px 18px 0 0;
+      cursor: pointer;
     }
 
     button {
       float: right;
-      width: 40%;
+      width: 35%;
       height: 46px;
       margin: 0 0 0 26px;
       border: none;
@@ -104,7 +128,11 @@
 @media all and (max-width: 900px) {
   .collection-form {
     .collection-url {
-      font-size: 14px;
+      font-size: 16px;
+
+      a {
+        font-size: 16px;
+      }
     }
 
     .collection-error-message {
@@ -120,6 +148,13 @@
       padding: 11px;
     }
 
+    .collection-head {
+      .collection-copy {
+        top: 25px;
+        right: 8px;
+      }
+    }
+
     .collection-link {
       .collection-delete-link {
         top: 20px;
@@ -133,8 +168,8 @@
       }
 
       button {
-        font-size: 14px;
-        margin: 0 0 0 5px;
+        font-size: 16px;
+        margin: 0 0 0 16px;
       }
     }
   }

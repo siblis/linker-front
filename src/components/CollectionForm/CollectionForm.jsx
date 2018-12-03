@@ -1,12 +1,15 @@
 import './CollectionForm.scss';
 
 import React, {PureComponent, Fragment} from 'react';
-import {withRouter} from 'react-router-dom';
+import {withRouter, Link} from 'react-router-dom';
 import PropTypes from 'prop-types';
 import Cookies from 'js-cookie';
+import {CopyToClipboard} from 'react-copy-to-clipboard';
 import config from '../../config';
 import Plus from '../../images/plus.png';
 import Delete from '../../images/delete.png';
+import Copy from '../../images/copy.png';
+import Clipboard from '../../images/clipboard.png';
 
 class CollectionForm extends PureComponent {
     static propTypes = {
@@ -19,6 +22,7 @@ class CollectionForm extends PureComponent {
         this.state = {
             user: Cookies.getJSON('user'),
             collection: {name: '', comment: '', url: '', links: [{name: '', url: '', comment: ''}]},
+            txtCollectionLink: '',
             txtCollectionName: '',
             txtDescription: '',
             txtLinkName: '',
@@ -27,7 +31,13 @@ class CollectionForm extends PureComponent {
             txtDeleteCollection: '',
             txtNewCollection: '',
             txtSystemError: '',
-            errorMessage: ''
+            txtMakeDuplicateCollection: '',
+            txtDeleteLink: '',
+            txtAddLink: '',
+            txtLinkIsCopied: '',
+            txtCopyCollectionLink: '',
+            errorMessage: '',
+            isLinkCopied: false
         };
     }
     
@@ -64,11 +74,7 @@ class CollectionForm extends PureComponent {
             if (response.status !== 200) {
                 throw new Error(response.statusText);
             }
-            return response.json()
-        }).then((collection) => {
-            this.setState({
-                collection: collection
-            })
+            this.props.onClose();
         }).catch(() => {
             this.setErrorMessage(this.state.txtSystemError);
         });
@@ -117,11 +123,7 @@ class CollectionForm extends PureComponent {
             if (response.status !== 200) {
                 throw new Error(response.statusText);
             }
-            return response.json()
-        }).then((collection) => {
-            this.setState({
-                collection: collection
-            })
+            this.props.onClose();
         }).catch(() => {
             this.setErrorMessage(this.state.txtSystemError);
         });
@@ -193,7 +195,7 @@ class CollectionForm extends PureComponent {
     };
     
     onSaveCollection = () => {
-        if (this.props.id === '0') {
+        if (this.props.id === '0' || this.state.collection.url === '') {
             this.createCollection();
         } else {
             this.updateCollection();
@@ -208,8 +210,18 @@ class CollectionForm extends PureComponent {
         }
     };
     
+    onCopyCollection = () => {
+        if (this.props.id !== '0') {
+            const collection = {...this.state.collection};
+            collection.url = '';
+            this.setState({
+                collection: collection
+            });
+        }
+    };
+    
     render() {
-        const {collection, errorMessage} = this.state;
+        const {collection, errorMessage, isLinkCopied} = this.state;
         return (
             <Fragment>
                 {
@@ -220,9 +232,24 @@ class CollectionForm extends PureComponent {
                 }
                 <div className="collection-url">
                     {
-                        collection.url !== '' ?
-                            config.collectionBaseUrl + collection.url :
-                            this.state.txtNewCollection
+                        collection.url === '' ?
+                            this.state.txtNewCollection :
+                            isLinkCopied ? this.state.txtLinkIsCopied :
+                                <Fragment>
+                                    <Link
+                                        to={'/collection/' + collection.url}
+                                        title={config.collectionBaseUrl + collection.url}
+                                        target="_blank">
+                                        {this.state.txtCollectionLink}
+                                    </Link>
+                                    <CopyToClipboard text={config.collectionBaseUrl + collection.url}
+                                                     onCopy={() => this.setState({isLinkCopied: true})}>
+                                        <div className="collection-url-clipboard"
+                                             title={this.state.txtCopyCollectionLink}>
+                                            <img src={Clipboard} alt="Copy collection url to clipboard"/>
+                                        </div>
+                                    </CopyToClipboard>
+                                </Fragment>
                     }
                 </div>
                 <div className="collection-head">
@@ -235,6 +262,22 @@ class CollectionForm extends PureComponent {
                               value={collection.comment}
                               onChange={this.handleInputChange}
                               placeholder={this.state.txtDescription}/>
+                    {
+                        this.props.id !== '0' ?
+                            <div className="collection-copy"
+                                 onClick={this.onCopyCollection}
+                                 title={this.state.txtMakeDuplicateCollection}>
+                                <img src={Copy} alt="Copy collection"/>
+                            </div> : ''
+                    }
+                </div>
+                <div className="collection-control">
+                    <button onClick={this.onDeleteCollection}>{this.state.txtDeleteCollection}</button>
+                    <button onClick={this.onSaveCollection}>{this.state.txtSaveCollection}</button>
+                    <div onClick={this.onAddLink}
+                         title={this.state.txtAddLink}>
+                        <img src={Plus} alt="Add link"/>
+                    </div>
                 </div>
                 {
                     Array.from(collection.links).map((link, idx) =>
@@ -253,17 +296,15 @@ class CollectionForm extends PureComponent {
                                       value={collection.links[idx].comment}
                                       onChange={this.handleInputChange}
                                       placeholder={this.state.txtDescription}/>
-                            <div className="collection-delete-link" data-link={idx} onClick={this.onDeleteLink}>
+                            <div className="collection-delete-link"
+                                 data-link={idx}
+                                 title={this.state.txtDeleteLink}
+                                 onClick={this.onDeleteLink}>
                                 <img src={Delete} alt="Delete link"/>
                             </div>
                         </div>
                     )
                 }
-                <div className="collection-control">
-                    <button onClick={this.onDeleteCollection}>{this.state.txtDeleteCollection}</button>
-                    <button onClick={this.onSaveCollection}>{this.state.txtSaveCollection}</button>
-                    <div onClick={this.onAddLink}><img src={Plus} alt="Add link"/></div>
-                </div>
             </Fragment>
         );
     }

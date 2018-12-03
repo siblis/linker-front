@@ -38,10 +38,9 @@ export default class Collection extends PureComponent {
             }).then((data) => this.setState({
                 data: data
             })).catch(() => {
-                this.props.history.push('/');
+                this.props.history.push('/not-found');
             });
         }
-        
     }
     
     render() {
@@ -63,7 +62,7 @@ export default class Collection extends PureComponent {
                                     <h2>{link.name}</h2>
                                     <a href={link.url} target="_blank">{link.url}</a>
                                     <p>{link.comment}</p>
-                                    <img src={config.thumbs + link.url} alt="logo"/>
+                                    <img src={config.thumbs + link.url} alt="thumb"/>
                                 </div>
                             </Fragment>
                         )
