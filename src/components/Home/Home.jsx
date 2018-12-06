@@ -5,6 +5,7 @@ import ArrowLeft from '../../images/arrow-left.png';
 import React, {PureComponent} from 'react';
 import {Link} from 'react-router-dom';
 import classNames from 'classnames';
+import Cookies from 'js-cookie';
 import canvasApp from './canvasApp';
 import Enter from '../Enter/Enter';
 import Info from '../Info/Info';
@@ -21,6 +22,7 @@ export default class Home extends PureComponent {
             txtDemo: '',
             isInfoClosed: true,
             isEnterClosed: true,
+            user: Cookies.getJSON('user')
         };
     }
     
@@ -31,7 +33,11 @@ export default class Home extends PureComponent {
     
     toggleEnterModal = () => {
         this.resetPage();
-        this.setState({isEnterClosed: !this.state.isEnterClosed})
+        if (this.state.user !== undefined) {
+            this.props.history.push('/cabinet');
+        } else {
+            this.setState({isEnterClosed: !this.state.isEnterClosed})
+        }
     };
     
     resetPage = () => {
