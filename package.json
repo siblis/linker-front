@@ -6,7 +6,8 @@
   "scripts": {
     "build": "webpack --mode production",
     "dev": "webpack-dev-server --mode development",
-    "dev:cc": "node cli/component.js --name"
+    "dev:cc": "node cli/component.js --name",
+    "tserver": "node src/tserver.js"
   },
   "keywords": [],
   "author": "",
@@ -39,6 +40,8 @@
     "react": "^16.5.0",
     "react-copy-to-clipboard": "^5.0.1",
     "react-dom": "^16.5.0",
-    "react-router-dom": "^4.3.1"
+    "react-router-dom": "^4.3.1",
+    "express": "~4.16.0",
+    "puppeteer": "^1.11.0"
   }
 }

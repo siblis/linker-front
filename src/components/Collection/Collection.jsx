@@ -60,7 +60,7 @@ export default class Collection extends PureComponent {
                             <Fragment key={idx}>
                                 <div className="url-content">
                                     <h2>{link.name}</h2>
-                                    <a href={link.url} target="_blank">{link.url}</a>
+                                    <a href={!/^http(s?):\/\//.test(link.url) ? 'http://' + link.url : link.url} target="_blank">{link.url}</a>
                                     <p>{link.comment}</p>
                                     <img src={config.thumbs + link.url} alt="thumb"/>
                                 </div>
