@@ -147,6 +147,7 @@ export default class Cabinet extends Component {
                                                                             src={config.thumbs + link.url}
                                                                             alt={`thums-${collectionIdx}-${idx}`}
                                                                             initialImage={Loading}
+                                                                            fallbackImage=""
                                                                         />
                                                                     </div>
                                                                 </Fragment>

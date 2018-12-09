@@ -2,7 +2,9 @@ import './Collection.scss';
 
 import React, {PureComponent, Fragment} from 'react';
 import {Link} from 'react-router-dom';
+import ReactImageFallback from 'react-image-fallback';
 import Logo from '../../images/logo.png';
+import Loading from '../../images/loading.svg';
 import config from '../../config';
 
 export default class Collection extends PureComponent {
@@ -62,7 +64,13 @@ export default class Collection extends PureComponent {
                                     <h2>{link.name}</h2>
                                     <a href={!/^http(s?):\/\//.test(link.url) ? 'http://' + link.url : link.url} target="_blank" rel="noopener">{link.url}</a>
                                     <p>{link.comment}</p>
-                                    <img src={config.thumbs + link.url} alt="thumb"/>
+                                    {/*<img src={config.thumbs + link.url} alt="thumb"/>*/}
+                                    <ReactImageFallback
+                                        src={config.thumbs + link.url}
+                                        alt={`thums-${idx}`}
+                                        initialImage={Loading}
+                                        fallbackImage=""
+                                    />
                                 </div>
                             </Fragment>
                         )
