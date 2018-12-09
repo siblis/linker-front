@@ -46,8 +46,6 @@ module.exports = {
         ]
     },
     
-    devtool: 'source-map',
-    
     optimization: {
         minimizer: [
             new UglifyJsPlugin({
@@ -67,7 +65,8 @@ module.exports = {
         new HtmlPlugin({
             title: 'Linker',
             template: path.resolve(__dirname, 'src', 'index.html'),
-            filename: 'index.html'
+            filename: 'index.html',
+            minify: {removeScriptTypeAttributes: true}
         }),
         new MiniCssExtractPlugin({filename: 'resources/css/style.css?[contenthash]'}),
         new CopyWebpackPlugin([
@@ -78,6 +77,10 @@ module.exports = {
             {
                 from: 'src/data',
                 to: 'resources/data'
+            },
+            {
+                from: 'src/robots.txt',
+                to: 'robots.txt'
             }
         ]),
     ]
