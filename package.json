@@ -35,13 +35,14 @@
   },
   "dependencies": {
     "classnames": "^2.2.6",
+    "express": "~4.16.0",
     "js-cookie": "^2.2.0",
     "prop-types": "^15.6.2",
+    "puppeteer": "^1.11.0",
     "react": "^16.5.0",
     "react-copy-to-clipboard": "^5.0.1",
     "react-dom": "^16.5.0",
-    "react-router-dom": "^4.3.1",
-    "express": "~4.16.0",
-    "puppeteer": "^1.11.0"
+    "react-image-fallback": "^8.0.0",
+    "react-router-dom": "^4.3.1"
   }
 }

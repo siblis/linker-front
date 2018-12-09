@@ -4,11 +4,13 @@ import React, {Component, Fragment} from 'react';
 import Cookies from 'js-cookie';
 import classNames from 'classnames';
 import {Link} from 'react-router-dom';
+import ReactImageFallback from 'react-image-fallback';
 import CollectionForm from '../CollectionForm/CollectionForm';
 import Profile from '../Profile/Profile';
 import Logo from '../../images/logo.png';
 import ArrowLeft from '../../images/arrow-left.png';
 import Plus from '../../images/plus.png';
+import Loading from '../../images/loading.svg';
 import config from '../../config';
 
 export default class Cabinet extends Component {
@@ -126,8 +128,8 @@ export default class Cabinet extends Component {
                                         </div>
                                     </div>
                                     {
-                                        Array.from(collections).map((collection, idx) =>
-                                            <Fragment key={idx}>
+                                        Array.from(collections).map((collection, collectionIdx) =>
+                                            <Fragment key={collectionIdx}>
                                                 <div className="collection-block" data-collection={collection.id}
                                                      onClick={this.openCollectionForm}>
                                                     <div className="collection-name">
@@ -140,8 +142,13 @@ export default class Cabinet extends Component {
                                                         {
                                                             Array.from(collection.links).map((link, idx) =>
                                                                 <Fragment key={idx}>
-                                                                    <div><img src={config.thumbs + link.url}
-                                                                              alt="thumbs"/></div>
+                                                                    <div>
+                                                                        <ReactImageFallback
+                                                                            src={config.thumbs + link.url}
+                                                                            alt={`thums-${collectionIdx}-${idx}`}
+                                                                            initialImage={Loading}
+                                                                        />
+                                                                    </div>
                                                                 </Fragment>
                                                             )
                                                         }
