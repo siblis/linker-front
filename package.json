@@ -1,7 +1,7 @@
 {
   "name": "linker-frontend",
   "version": "1.0.0",
-  "description": "",
+  "description": "Linker is an easy way to collect and transfer links",
   "main": "index.jsx",
   "scripts": {
     "build": "webpack --mode production",
@@ -10,7 +10,7 @@
     "tserver": "node src/tserver.js"
   },
   "keywords": [],
-  "author": "",
+  "author": "Mark V. Vaisman",
   "license": "ISC",
   "devDependencies": {
     "babel-core": "^6.26.3",

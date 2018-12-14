@@ -81,6 +81,10 @@ module.exports = {
             {
                 from: 'src/robots.txt',
                 to: 'robots.txt'
+            },
+            {
+                from: 'src/images/favicon.png',
+                to: 'resources/images/favicon.png'
             }
         ]),
     ]
