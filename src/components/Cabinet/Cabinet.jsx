@@ -5,12 +5,14 @@ import Cookies from 'js-cookie';
 import classNames from 'classnames';
 import {Link} from 'react-router-dom';
 import ReactImageFallback from 'react-image-fallback';
+import {CopyToClipboard} from 'react-copy-to-clipboard';
 import CollectionForm from '../CollectionForm/CollectionForm';
 import Profile from '../Profile/Profile';
 import Logo from '../../images/logo.png';
 import ArrowLeft from '../../images/arrow-left.png';
 import Plus from '../../images/plus.png';
 import Loading from '../../images/loading.svg';
+import Clipboard from '../../images/copy.png';
 import config from '../../config';
 
 export default class Cabinet extends Component {
@@ -21,11 +23,14 @@ export default class Cabinet extends Component {
             txtProfile: '',
             txtCollectionLink: '',
             txtBack: '',
+            txtCopyCollectionLink: '',
+            txtLinkIsCopied: '',
             user: Cookies.getJSON('user'),
             collections: [],
             isCollectionFormOpened: false,
             isProfileOpened: false,
-            selectedCollection: '0'
+            selectedCollection: '0',
+            isLinkCopied: false
         };
     }
     
@@ -68,7 +73,14 @@ export default class Cabinet extends Component {
         this.setState({isProfileOpened: !this.state.isProfileOpened})
     };
     
-    openCollectionForm = (event) => {
+    onClickCollectionBlock = (event) => {
+        if (event.target.className === 'clipboard-img') {
+            this.setState({isLinkCopied: true});
+            setTimeout(() => {
+                this.setState({isLinkCopied: false});
+            }, 2000);
+            return;
+        }
         this.setState({
             selectedCollection: event.currentTarget.getAttribute('data-collection'),
             isCollectionFormOpened: true
@@ -92,6 +104,10 @@ export default class Cabinet extends Component {
         const profileModalClass = classNames(
             'profile',
             {'hidden': !this.state.isProfileOpened}
+        );
+        const copyLinkFlashClass = classNames(
+            'on-copy-link-flash',
+            {'hidden': !this.state.isLinkCopied}
         );
         if (this.state.user === undefined) {
             return null;
@@ -117,24 +133,39 @@ export default class Cabinet extends Component {
                                 </div>
                         }
                     </div>
+                    <div className={copyLinkFlashClass}>
+                        {this.state.txtLinkIsCopied}
+                    </div>
                     <div className="content">
                         {
                             !this.state.isCollectionFormOpened && !this.state.isProfileOpened ?
                                 <Fragment>
                                     <div className="content-menu">
                                         <span>{this.state.txtMyCollections}</span>
-                                        <div data-collection="0" onClick={this.openCollectionForm}>
+                                        <div data-collection="0" onClick={this.onClickCollectionBlock}>
                                             <img src={Plus} alt="New collection"/>
                                         </div>
                                     </div>
                                     {
                                         Array.from(collections).map((collection, collectionIdx) =>
                                             <Fragment key={collectionIdx}>
-                                                <div className="collection-block" data-collection={collection.id}
-                                                     onClick={this.openCollectionForm}>
+                                                <div
+                                                    className="collection-block"
+                                                    data-collection={collection.id}
+                                                    onClick={this.onClickCollectionBlock}>
                                                     <div className="collection-name">
                                                         {collection.name}
                                                     </div>
+                                                    <CopyToClipboard
+                                                        text={config.collectionBaseUrl + collection.url}>
+                                                        <div className="collection-url-clipboard"
+                                                             title={this.state.txtCopyCollectionLink}>
+                                                            <img
+                                                                className="clipboard-img"
+                                                                src={Clipboard}
+                                                                alt="Copy collection url to clipboard"/>
+                                                        </div>
+                                                    </CopyToClipboard>
                                                     <div className="collection-comment">
                                                         {collection.comment}
                                                     </div>

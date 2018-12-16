@@ -2,6 +2,7 @@
   "txtMyCollections": "Мои коллекции",
   "txtProfile": "Профиль",
   "txtBack": "назад",
-  "txtCollectionLink": "Ссылка"
-
+  "txtCollectionLink": "Ссылка",
+  "txtCopyCollectionLink": "Копировать ссылку в буфер обмена",
+  "txtLinkIsCopied": "Ссылка скопирована в буфер обмена"
 }

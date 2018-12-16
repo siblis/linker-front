@@ -47,6 +47,7 @@ export default class Collection extends PureComponent {
     
     render() {
         const {data} = this.state;
+        let url;
         return (
             <Fragment>
                 <div className="header">
@@ -58,21 +59,24 @@ export default class Collection extends PureComponent {
                         <p>{data.comment}</p>
                     </div>
                     {
-                        Array.from(data.links).map((link, idx) =>
-                            <Fragment key={idx}>
-                                <div className="url-content">
-                                    <h2>{link.name}</h2>
-                                    <a href={!/^http(s?):\/\//.test(link.url) ? 'http://' + link.url : link.url} target="_blank" rel="noopener">{link.url}</a>
-                                    <p>{link.comment}</p>
-                                    {/*<img src={config.thumbs + link.url} alt="thumb"/>*/}
-                                    <ReactImageFallback
-                                        src={config.thumbs + link.url}
-                                        alt={`thums-${idx}`}
-                                        initialImage={Loading}
-                                        fallbackImage=""
-                                    />
-                                </div>
-                            </Fragment>
+                        Array.from(data.links).map((link, idx) => {
+                                url = !/^http(s?):\/\//.test(link.url) ? 'http://' + link.url : link.url
+                                return <Fragment key={idx}>
+                                    <div className="url-content">
+                                        <h2>{link.name}</h2>
+                                        <a href={url} target="_blank" rel="noopener">{link.url}</a>
+                                        <p>{link.comment}</p>
+                                        <a href={url} target="_blank" rel="noopener">
+                                            <ReactImageFallback
+                                                src={config.thumbs + link.url}
+                                                alt={`thums-${idx}`}
+                                                initialImage={Loading}
+                                                fallbackImage=""
+                                            />
+                                        </a>
+                                    </div>
+                                </Fragment>
+                            }
                         )
                     }
                 </div>
