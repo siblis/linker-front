@@ -20,6 +20,7 @@ export default class Home extends PureComponent {
             txtInfo: '',
             txtBack: '',
             txtDemo: '',
+            txtCabinet: '',
             isInfoClosed: true,
             isEnterClosed: true,
             user: Cookies.getJSON('user')
@@ -53,7 +54,14 @@ export default class Home extends PureComponent {
         const lang = (navigator.languages ? navigator.languages[0] : navigator.language) === 'ru' ? 'ru' : 'en';
         fetch(`/resources/locale/${lang}/home.json`)
             .then(response => response.json())
-            .then(data => this.setState(data));
+            .then(data => {
+                this.setState(data);
+                if (this.state.user !== undefined) {
+                    this.setState({
+                        txtLogin: this.state.txtCabinet
+                    });
+                }
+            });
         canvasApp(this.refs.canvas);
     }
     
@@ -90,7 +98,7 @@ export default class Home extends PureComponent {
                         <div className="title">{this.state.txtTitle}</div>
                     </div>
                     <div className={infoModalClass}>
-                       <Info/>
+                        <Info/>
                     </div>
                     <div className={enterModalClass}>
                         <Enter/>
@@ -108,7 +116,9 @@ export default class Home extends PureComponent {
                         }
                     </div>
                     <div className="demo-collection">
-                        <Link to="/collection">{this.state.txtDemo}<div className="highlighting"/></Link>
+                        <Link to="/collection">{this.state.txtDemo}
+                            <div className="highlighting"/>
+                        </Link>
                     </div>
                 </div>
             </div>
